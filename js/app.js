@@ -41,7 +41,7 @@ function moveShapes() {
         // console.log(yourNumber, roll, array, type, roll.length % 2 === 0 ? roll.length / 2 : (roll.length - 1) / 2)
         return yourNumber;
     }
-    setTimeout(shake,time - 2000)
+    setTimeout(shake, time - 2000)
 }
 function shake() {
     for (const shape of shapes) {
@@ -63,4 +63,95 @@ function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
+
+//////////// for scroll 
+
+const navList = document.querySelector('#navbar__list');
+
+// all sections 
+const sections = document.getElementsByTagName("section")
+
+function activate(theSection) {
+    // add active to the menu-link
+    let theLink = document.querySelectorAll(`[section="${theSection.id}"]`)[0]
+    // detrmin the Y offset of the section and want it to active when it apperd with 200 px 
+    let sectionYOffset = theSection.getBoundingClientRect().y - 500;
+    // to set it un active while it passes 
+    let height = theSection.getBoundingClientRect().height;
+
+    // if it has the class active 
+    let isActive = theSection.classList.contains("active");
+
+    if (sectionYOffset < 0 && sectionYOffset + height > 0) {
+        // to not added it many times
+        if (!isActive) {
+            theSection.classList.add("active")
+            //add active class to menu link
+            theLink.classList.add("active")
+            // scrollToSection(theSection)
+            leavHomeSection(theSection.id)
+        } else {
+            return;
+        }
+
+    } else {
+        theSection.classList.remove("active")
+        //add active class to menu link
+        theLink.classList.remove("active")
+        theLink.setAttribute("style", `background-color:unset;`)
+    }
+}
+
+for (let i = 0; i < sections.length; i++) {
+    // we need to call the function on scrolling 
+    document.addEventListener('scroll', function () {
+        // excute the same function for all sections
+        activate(sections[i])
+    });
+}
+
+function leavHomeSection(id) {
+    if (id === "home") {
+        document.getElementsByTagName("nav")[0].setAttribute("style", "bottom:10px;")
+        // document.getElementById("shapes").setAttribute("style", "background-color: #10101c;")
+        document.getElementById("shapes").setAttribute("style", `background:
+        linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);`)
+        document.getElementById("shapes").classList.remove("out-home")
+        document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#1B3A4B;`)
+
+    } else {
+        document.getElementsByTagName("nav")[0].setAttribute("style", "bottom: calc(100% - 65px);")
+        // document.getElementById("shapes").setAttribute("style", "background-color: #182333;")
+        document.getElementById("shapes").setAttribute("style", `background:
+        linear-gradient(180deg, #212F45 0%, #0B1018 100%);`)
+        document.getElementById("shapes").classList.add("out-home")
+        document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#222138;`)
+    }
+}
+
+let navLinks = document.getElementsByClassName("nav-link")
+
+// make function that scroll to the section with id
+function scrollToSection(theSection) {
+    // get the Y Offset of that section
+    let sectionYOffset = theSection.getBoundingClientRect().y;
+    // sum of the section Y offset to window Y Offset will get back the position of the section
+    let windowYOffset = window.pageYOffset;
+    // add 50 px to make it a little more under the nav bar 
+    let sectionLocation = sectionYOffset + windowYOffset - 50
+    //let's scroll to the section Location smooth with scrollTo();
+    window.scrollTo(({
+        top: sectionLocation,
+        behavior: 'smooth',
+
+    }))
+}
+for (let navLink of navLinks) {
+    navLink.addEventListener("click", function (event) {
+        event.preventDefault()
+        // it will send the ID of the section to the function
+        let theSection = document.getElementById(navLink.getAttribute("href").slice(1));
+        scrollToSection(theSection)
+    })
 }

@@ -7,34 +7,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="personal page of abdelrahman ahmed">
     <link rel="stylesheet" href="styles/style.css">
-
-    <script src="https://kit.fontawesome.com/57a3b4e0a8.js" crossorigin="anonymous"></script>
-
     <title>AbdEl-Rahman</title>
 </head>
 
 <body>
     <nav>
-        <ul>
-            <li section="home" class="active"><a href="#home">Home</a></li>
-            <li section="about"><a href="#about">About</a></li>
-            <li section="portfolio"><a href="#portfolio">Portfolio</a></li>
-            <li section="contact"><a href="#contact">Contact</a></li>
+        <ul id="navbar__list">
+            <li section="home" class="active"><a class="nav-link" href="#home">Home</a></li>
+            <li section="about"><a class="nav-link" href="#about">About</a></li>
+            <li section="portfolio"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li section="contact"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
     </nav>
     <div id="social-box">
         <ul>
-            <li class="icon"><i class="fa-brands fa-instagram"></i></li>
-            <li class="icon"><i class="fa-brands fa-linkedin"></i></li>
-            <li class="icon"><i class="fa-brands fa-github"></i></li>
-            <li class="icon"><i class="fa-brands fa-codepen"></i></li>
+            <li> <a href="#instagram">
+                    <svg class="icon" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                        <path
+                            d="M8.7 0H21.3C26.1 0 30 3.9 30 8.7V21.3C30 23.6074 29.0834 25.8203 27.4518 27.4518C25.8203 29.0834 23.6074 30 21.3 30H8.7C3.9 30 0 26.1 0 21.3V8.7C0 6.39262 0.916605 4.17974 2.54817 2.54817C4.17974 0.916605 6.39262 0 8.7 0ZM8.4 3C6.96783 3 5.59432 3.56893 4.58162 4.58162C3.56893 5.59432 3 6.96783 3 8.4V21.6C3 24.585 5.415 27 8.4 27H21.6C23.0322 27 24.4057 26.4311 25.4184 25.4184C26.4311 24.4057 27 23.0322 27 21.6V8.4C27 5.415 24.585 3 21.6 3H8.4ZM22.875 5.25C23.3723 5.25 23.8492 5.44754 24.2008 5.79917C24.5525 6.15081 24.75 6.62772 24.75 7.125C24.75 7.62228 24.5525 8.0992 24.2008 8.45083C23.8492 8.80246 23.3723 9 22.875 9C22.3777 9 21.9008 8.80246 21.5492 8.45083C21.1975 8.0992 21 7.62228 21 7.125C21 6.62772 21.1975 6.15081 21.5492 5.79917C21.9008 5.44754 22.3777 5.25 22.875 5.25ZM15 7.5C16.9891 7.5 18.8968 8.29018 20.3033 9.6967C21.7098 11.1032 22.5 13.0109 22.5 15C22.5 16.9891 21.7098 18.8968 20.3033 20.3033C18.8968 21.7098 16.9891 22.5 15 22.5C13.0109 22.5 11.1032 21.7098 9.6967 20.3033C8.29018 18.8968 7.5 16.9891 7.5 15C7.5 13.0109 8.29018 11.1032 9.6967 9.6967C11.1032 8.29018 13.0109 7.5 15 7.5ZM15 10.5C13.8065 10.5 12.6619 10.9741 11.818 11.818C10.9741 12.6619 10.5 13.8065 10.5 15C10.5 16.1935 10.9741 17.3381 11.818 18.182C12.6619 19.0259 13.8065 19.5 15 19.5C16.1935 19.5 17.3381 19.0259 18.182 18.182C19.0259 17.3381 19.5 16.1935 19.5 15C19.5 13.8065 19.0259 12.6619 18.182 11.818C17.3381 10.9741 16.1935 10.5 15 10.5Z"
+                            fill="#D9D9D9" />
+                    </svg>
+                </a></li>
+            <li><a href="#linkidin">
+                    <svg class="icon" viewBox="0 0 30 30" fill="none">
+                        <path
+                            d="M10.8 7.8C10.8 8.15601 10.6944 8.50402 10.4966 8.80003C10.2989 9.09604 10.0177 9.32675 9.68883 9.46298C9.35992 9.59922 8.998 9.63487 8.64884 9.56541C8.29967 9.49596 7.97894 9.32453 7.72721 9.07279C7.47547 8.82106 7.30404 8.50033 7.23459 8.15116C7.16513 7.802 7.20078 7.44008 7.33702 7.11117C7.47325 6.78226 7.70397 6.50114 7.99997 6.30335C8.29598 6.10557 8.64399 6 9 6C9.47739 6 9.93523 6.18964 10.2728 6.52721C10.6104 6.86477 10.8 7.32261 10.8 7.8ZM30 2.4V27.6C30 28.2365 29.7471 28.847 29.2971 29.2971C28.847 29.7471 28.2365 30 27.6 30H2.4C1.76348 30 1.15303 29.7471 0.702944 29.2971C0.252856 28.847 0 28.2365 0 27.6V2.4C0 1.76348 0.252856 1.15303 0.702944 0.702944C1.15303 0.252856 1.76348 0 2.4 0H27.6C28.2365 0 28.847 0.252856 29.2971 0.702944C29.7471 1.15303 30 1.76348 30 2.4ZM27.6 27.6V2.4H2.4V27.6H27.6ZM9 11.4C8.68174 11.4 8.37652 11.5264 8.15147 11.7515C7.92643 11.9765 7.8 12.2817 7.8 12.6V22.2C7.8 22.5183 7.92643 22.8235 8.15147 23.0485C8.37652 23.2736 8.68174 23.4 9 23.4C9.31826 23.4 9.62348 23.2736 9.84853 23.0485C10.0736 22.8235 10.2 22.5183 10.2 22.2V12.6C10.2 12.2817 10.0736 11.9765 9.84853 11.7515C9.62348 11.5264 9.31826 11.4 9 11.4ZM18 11.4C16.9197 11.3999 15.8642 11.7239 14.97 12.33C14.9044 12.0421 14.7349 11.7884 14.494 11.6176C14.253 11.4469 13.9576 11.3709 13.6642 11.4043C13.3707 11.4378 13.0999 11.5782 12.9036 11.7988C12.7073 12.0194 12.5992 12.3047 12.6 12.6V22.2C12.6 22.5183 12.7264 22.8235 12.9515 23.0485C13.1765 23.2736 13.4817 23.4 13.8 23.4C14.1183 23.4 14.4235 23.2736 14.6485 23.0485C14.8736 22.8235 15 22.5183 15 22.2V16.8C15 16.0044 15.3161 15.2413 15.8787 14.6787C16.4413 14.1161 17.2044 13.8 18 13.8C18.7957 13.8 19.5587 14.1161 20.1213 14.6787C20.6839 15.2413 21 16.0044 21 16.8V22.2C21 22.5183 21.1264 22.8235 21.3515 23.0485C21.5765 23.2736 21.8817 23.4 22.2 23.4C22.5183 23.4 22.8235 23.2736 23.0485 23.0485C23.2736 22.8235 23.4 22.5183 23.4 22.2V16.8C23.4 15.3678 22.8311 13.9943 21.8184 12.9816C20.8057 11.9689 19.4322 11.4 18 11.4Z"
+                            fill="#D9D9D9" />
+                    </svg>
+                </a></li>
+            <li><a href="#github">
+                    <svg class="icon" viewBox="0 0 30 30" fill="none">
+                        <path
+                            d="M15 0C13.0302 0 11.0796 0.397619 9.25975 1.17015C7.43986 1.94269 5.78628 3.07501 4.3934 4.50247C1.58035 7.38536 0 11.2954 0 15.3724C0 22.167 4.305 27.9317 10.26 29.9762C11.01 30.0992 11.25 29.6226 11.25 29.2076V26.6096C7.095 27.532 6.21 24.5497 6.21 24.5497C5.52 22.7665 4.545 22.29 4.545 22.29C3.18 21.3369 4.65 21.3676 4.65 21.3676C6.15 21.4752 6.945 22.951 6.945 22.951C8.25 25.2876 10.455 24.5958 11.31 24.2269C11.445 23.2277 11.835 22.5513 12.255 22.167C8.925 21.7827 5.43 20.4607 5.43 14.6038C5.43 12.8974 6 11.5293 6.975 10.4379C6.825 10.0536 6.3 8.45482 7.125 6.37955C7.125 6.37955 8.385 5.96449 11.25 7.94753C12.435 7.60934 13.725 7.44024 15 7.44024C16.275 7.44024 17.565 7.60934 18.75 7.94753C21.615 5.96449 22.875 6.37955 22.875 6.37955C23.7 8.45482 23.175 10.0536 23.025 10.4379C24 11.5293 24.57 12.8974 24.57 14.6038C24.57 20.476 21.06 21.7673 17.715 22.1516C18.255 22.6282 18.75 23.5659 18.75 24.9955V29.2076C18.75 29.6226 18.99 30.1145 19.755 29.9762C25.71 27.9163 30 22.167 30 15.3724C30 13.3537 29.612 11.3547 28.8582 9.48964C28.1044 7.62457 26.9995 5.92993 25.6066 4.50247C24.2137 3.07501 22.5601 1.94269 20.7403 1.17015C18.9204 0.397619 16.9698 0 15 0Z"
+                            fill="#D9D9D9" />
+                    </svg>
+                </a></li>
+            <li><a href="#codepen">
+                    <svg class="icon" viewBox="0 0 30 30" fill="none">
+                        <path
+                            d="M9.315 15L7.32 16.335V13.665L9.315 15ZM14.205 11.73V8.01L7.965 12.18L10.74 14.04L14.205 11.73ZM22.05 12.18L15.795 8.01V11.73L19.26 14.04L22.05 12.18ZM7.965 17.82L14.205 21.99V18.27L10.74 15.96L7.965 17.82ZM15.795 18.27V21.99L22.05 17.82L19.26 15.96L15.795 18.27ZM15 13.11L12.18 15L15 16.89L17.82 15L15 13.11ZM30 15C30 23.25 23.25 30 15 30C6.75 30 0 23.25 0 15C0 6.75 6.75 0 15 0C23.25 0 30 6.75 30 15ZM24.27 12.18V12.075L24.255 12L24.24 11.925C24.225 11.91 24.225 11.895 24.21 11.865L24.195 11.835L24.165 11.775L24.15 11.745L24.12 11.7L24.09 11.655L24.045 11.61L24 11.58V11.55L23.94 11.52L23.925 11.505L15.45 5.865C15.3192 5.77691 15.1652 5.72985 15.0075 5.72985C14.8498 5.72985 14.6958 5.77691 14.565 5.865L6.075 11.505V11.52L6 11.55V11.58L5.955 11.61L5.91 11.655L5.895 11.7L5.85 11.745L5.835 11.775L5.805 11.835L5.79 11.865L5.76 11.925V12H5.745L5.73 12.075V17.925L5.745 18H5.76V18.075C5.775 18.09 5.775 18.105 5.79 18.135L5.805 18.165L5.835 18.225L5.85 18.255L5.88 18.3L5.91 18.345L5.955 18.39L6 18.42V18.45L6.06 18.48L6.075 18.495L14.565 24.15C14.685 24.24 14.85 24.27 15 24.27C15.15 24.27 15.315 24.225 15.45 24.15L23.925 18.495L23.94 18.48L24 18.45V18.42L24.045 18.39L24.09 18.345L24.12 18.3L24.15 18.255L24.165 18.225L24.195 18.165L24.21 18.135L24.24 18.075V18H24.255L24.27 17.925V12.18ZM22.68 16.335V13.665L20.685 15L22.68 16.335Z"
+                            fill="#D9D9D9" />
+                    </svg>
+
+                </a></li>
         </ul>
 
     </div>
     <div id="shapes">
         <ul>
             <li class="shape">
-                <svg width="219" height="105" viewBox="0 0 219 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 219 105" fill="none">
                     <line x1="1.75" y1="52.8349" x2="88.3525" y2="2.83494" stroke="#1B3A4B" stroke-width="5" />
                     <line x1="88.8931" y1="100.919" x2="2.29053" y2="50.919" stroke="#1B3A4B" stroke-width="5" />
                     <line y1="-2.5" x2="100.863" y2="-2.5"
@@ -47,7 +69,7 @@
 
             </li>
             <li class="shape">
-                <svg width="219" height="111" viewBox="0 0 219 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 219 111" fill="none">
                     <line x1="1.75" y1="55.8349" x2="88.3525" y2="5.83494" stroke="#1B3A4B" stroke-width="5" />
                     <line x1="88.8931" y1="103.919" x2="2.29053" y2="53.919" stroke="#1B3A4B" stroke-width="5" />
                     <line y1="-2.5" x2="100.863" y2="-2.5"
@@ -68,109 +90,10 @@
                 <img src="images/profile-image.jpg" alt="profile-image">
             </div>
             <div>
-                <svg width="671" height="641" viewBox="0 0 671 641" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_f_6_204)">
-                        <rect x="3.35163" y="-1.12825" width="442.244" height="498.895"
-                            transform="matrix(0.444789 -0.895635 0.895861 0.444335 12.9975 407.709)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter1_f_6_204)">
-                        <rect x="3.1042" y="-1.69476" width="442.197" height="498.947"
-                            transform="matrix(0.282112 -0.959382 0.959568 0.281478 34.2896 462.352)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter2_f_6_204)">
-                        <rect x="2.76505" y="-2.20538" width="442.143" height="499.009"
-                            transform="matrix(0.112257 -0.993679 0.993761 0.111528 64.4171 511.841)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter3_f_6_204)">
-                        <rect x="2.38771" y="-2.60919" width="442.091" height="499.067"
-                            transform="matrix(-0.0439171 -0.999035 0.999003 -0.0446408 98.435 551.241)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter4_f_6_204)">
-                        <rect x="1.86507" y="-3.00488" width="442.035" height="499.13"
-                            transform="matrix(-0.227588 -0.973758 0.973616 -0.228194 145.971 590.297)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter5_f_6_204)">
-                        <rect x="1.41264" y="-3.24199" width="441.999" height="499.171"
-                            transform="matrix(-0.365557 -0.930789 0.930612 -0.366007 187.354 614.182)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <g filter="url(#filter6_f_6_204)">
-                        <rect x="0.996917" y="-3.39268" width="441.976" height="499.197"
-                            transform="matrix(-0.478929 -0.877854 0.877696 -0.479219 225.522 629.857)" stroke="#1B3A4B"
-                            stroke-width="5" />
-                    </g>
-                    <defs>
-                        <filter id="filter0_f_6_204" x="3.12592" y="-2.23254" width="664.349" height="638.465"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter1_f_6_204" x="23.4349" y="24.5585" width="623.731" height="584.883"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter2_f_6_204" x="52.7708" y="59.7364" width="565.059" height="514.527"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter3_f_6_204" x="66.7009" y="75.419" width="537.199" height="483.162"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter4_f_6_204" x="32.0161" y="34.8284" width="606.569" height="564.343"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter5_f_6_204" x="12.0049" y="9.70422" width="646.591" height="614.592"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                        <filter id="filter6_f_6_204" x="0" y="-7" width="670.601" height="648"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                            <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur_6_204" />
-                        </filter>
-                    </defs>
+                <svg viewBox="0 0 385 385" fill="none">
+                    <circle cx="192.5" cy="192.5" r="189" stroke="#1B3A4B" stroke-width="7" />
                 </svg>
-            </div>
-            <div>
-                <svg width="455" height="455" viewBox="0 0 455 455" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_5_2)">
-                        <circle cx="227.5" cy="227.5" r="189" stroke="#1B3A4B" stroke-width="7"
-                            shape-rendering="crispEdges" />
-                    </g>
-                    <defs>
-                        <filter id="filter0_d_5_2" x="0" y="0" width="455" height="455" filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                            <feOffset />
-                            <feGaussianBlur stdDeviation="17.5" />
-                            <feComposite in2="hardAlpha" operator="out" />
-                            <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.24 0" />
-                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5_2" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5_2" result="shape" />
-                        </filter>
-                    </defs>
-                </svg>
+
             </div>
         </div>
         <div class="content">
@@ -183,6 +106,51 @@
                 </p>
                 <div>
                     <button class="primary-btn">Say hi</button>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <section id="about">
+        <div class="center-box">
+            <div class="blur-box">
+                <div class="content">
+                    <div>
+                        <h1 class="center">About</h1>
+                        <p class="center"> <strong>Elictricala Engineer</strong> studing in scince valley Academy, NV
+                            with 5
+                            months of
+                            experience in web
+                            development and design. Looking to deliver excellent web development skills </p>
+                    </div>
+
+                </div>
+
+                <div class="grid-container">
+                    <div>
+                        <img class="profile-image" src="images/profile-image.jpg" alt="profile-image">
+                    </div>
+                    <div>
+
+                        <ul>
+                            <li><strong> Birthedate: -</strong> 18 / 6 / 2000</li>
+                            <li><strong>Phone: -</strong> 01015753392 </li>
+                            <li><strong>Graduate: -</strong> scince valley Academy (2018 - 2023)</li>
+                            <li><strong>Living: -</strong> Egypt / Banha</li>
+                            <li><strong>My job: -</strong> Freelancer (2022 - present)</li>
+
+                        </ul>
+                        <button class="primary-btn">
+                            <span><svg class="icon" viewBox="0 0 25 25" fill="none">
+                                    <path
+                                        d="M3.125 25C2.26562 25 1.53021 24.6943 0.91875 24.0828C0.30625 23.4703 0 22.7344 0 21.875V17.1875H3.125V21.875H21.875V17.1875H25V21.875C25 22.7344 24.6943 23.4703 24.0828 24.0828C23.4703 24.6943 22.7344 25 21.875 25H3.125ZM12.5 18.75L4.6875 10.9375L6.875 8.67188L10.9375 12.7344V0H14.0625V12.7344L18.125 8.67188L20.3125 10.9375L12.5 18.75Z"
+                                        fill="white" />
+                                </svg>
+                            </span>
+                            Download my resume
+                        </button>
+                    </div>
                 </div>
 
             </div>
