@@ -3,7 +3,7 @@
 // for shapes
 
 const shapes = document.getElementsByClassName("shape")
-for (let i = 0; i < 7; i++) {
+for (let i = 0; i < 8; i++) {
     let shipesList = document.getElementById("shapes").firstElementChild
     let shapes = document.getElementsByClassName("shape")
     let newShape = document.createElement("li")
@@ -103,13 +103,6 @@ function activate(theSection) {
     }
 }
 
-for (let i = 0; i < sections.length; i++) {
-    // we need to call the function on scrolling 
-    document.addEventListener('scroll', function () {
-        // excute the same function for all sections
-        activate(sections[i])
-    });
-}
 
 function leavHomeSection(id) {
     if (id === "home") {
@@ -155,3 +148,55 @@ for (let navLink of navLinks) {
         scrollToSection(theSection)
     })
 }
+
+//////////// skills section ////////////////
+
+const skillsList = document.getElementById("skills")
+const skillsItems = document.querySelectorAll(".skills-item")
+let initialSkills = false
+
+
+
+function isApeard(theSection) {
+    let sectionYOffset = theSection.getBoundingClientRect().y - 700;
+    // to set it un active while it passes 
+    let height = theSection.getBoundingClientRect().height;
+
+    if (sectionYOffset < 0 && sectionYOffset + height > 0 && !initialSkills) {
+        initSkillSection()
+        initialSkills = true
+    }
+
+
+
+}
+
+function initSkillSection() {
+    for (const skill of skillsItems) {
+        let rate = Number(skill.lastElementChild.textContent.slice(0, -1)) / 100
+        skill.lastElementChild.setAttribute("style", `height: calc(200px * ${rate} );`)
+        let num = rate * 100;
+        let value = 0;
+
+       let theInterval = setInterval(() => {
+            if (value < num) {
+                value++
+            }else{
+                clearInterval(theInterval)
+            }
+            skill.lastElementChild.innerHTML = "<span>"+value + "% </span>" 
+        }, 50);
+    }
+}
+
+///// scroll eventListener
+
+document.addEventListener('scroll', function () {
+    // excute the same function for all sections
+    for (let i = 0; i < sections.length; i++) {
+        // we need to call the function on scrolling 
+        activate(sections[i])
+    }
+    isApeard(skillsList)
+
+});
