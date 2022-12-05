@@ -132,7 +132,7 @@ function scrollToSection(theSection) {
     // sum of the section Y offset to window Y Offset will get back the position of the section
     let windowYOffset = window.pageYOffset;
     // add 50 px to make it a little more under the nav bar 
-    let sectionLocation = sectionYOffset + windowYOffset - 50
+    let sectionLocation = sectionYOffset + windowYOffset -100
     //let's scroll to the section Location smooth with scrollTo();
     window.scrollTo(({
         top: sectionLocation,
@@ -184,7 +184,7 @@ function initSkillSection() {
             }else{
                 clearInterval(theInterval)
             }
-            skill.lastElementChild.innerHTML = "<span>"+value + "% </span>" 
+            skill.lastElementChild.innerHTML = "<p>"+value + "</p>" 
         }, 50);
     }
 }
