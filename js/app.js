@@ -132,7 +132,7 @@ function scrollToSection(theSection) {
     // sum of the section Y offset to window Y Offset will get back the position of the section
     let windowYOffset = window.pageYOffset;
     // add 50 px to make it a little more under the nav bar 
-    let sectionLocation = sectionYOffset + windowYOffset -100
+    let sectionLocation = sectionYOffset + windowYOffset - 100
     //let's scroll to the section Location smooth with scrollTo();
     window.scrollTo(({
         top: sectionLocation,
@@ -178,25 +178,27 @@ function initSkillSection() {
         let num = rate * 100;
         let value = 0;
 
-       let theInterval = setInterval(() => {
+        let theInterval = setInterval(() => {
             if (value < num) {
                 value++
-            }else{
+            } else {
                 clearInterval(theInterval)
             }
-            skill.lastElementChild.innerHTML = "<p>"+value + "</p>" 
+            skill.lastElementChild.innerHTML = "<p>" + value + "</p>"
         }, 50);
     }
 }
 
 ///// scroll eventListener
 
-document.addEventListener('scroll', function () {
-    // excute the same function for all sections
+
+window.onscroll = function () { myFunction() };
+
+function myFunction() {
     for (let i = 0; i < sections.length; i++) {
         // we need to call the function on scrolling 
         activate(sections[i])
     }
     isApeard(skillsList)
 
-});
+}
