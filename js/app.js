@@ -202,3 +202,52 @@ function myFunction() {
     isApeard(skillsList)
 
 }
+
+
+//// projects crown
+
+
+const projects = document.getElementsByClassName("project");
+
+const crown = document.getElementsByClassName("crown")[0];
+
+crown.onscroll = function () { crownMove() }
+
+function crownMove() {
+    let crownData = crown.getBoundingClientRect();
+    for (let i = 0; i < projects.length; i++) {
+        const project = projects[i];
+        let data = project.getBoundingClientRect()
+        let projectLimet = ((crownData.width / 2) - (data.width / 2)) + (data.width / 2)
+        let projectCo = ((data.x) - (crownData.x)) + (data.width / 2)
+        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - crownData.width / 2) / (crownData.width / 2)) + 0.2
+        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+    }
+}
+crownMove()
+
+const opjects = []
+for (const project of projects) {
+    let project2 = project.cloneNode(true)
+    crown.appendChild(project2);
+    opjects.push(project2)
+}
+console.log(opjects);
+// Create a copy of the table and adds it to the scrollable element
+
+
+const options = {
+    root: crown,
+    rootMargin: '0px',
+    threshold: 0
+}
+
+const callback = (entries) => {
+    if (!entries[0].isIntersecting) {
+        // table1 is out of bounds, we can crown back to it
+        crown.scrollLeft = 0;
+    }
+}
+
+const observer = new IntersectionObserver(callback, options);
+observer.observe(opjects[0]);
