@@ -492,16 +492,14 @@ nav ul a {
     width: 80%;
     max-width: 600px;
 }
-
+#portfolio .center-box{
+    margin-top: 50px;
+}
 .crown {
     display: flex;
     justify-content: start;
     gap: 20px;
-    /* background: rgba(39, 38, 64, 0.13); */
-    /* box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 45%); */
-    /* backdrop-filter: blur(2px); */
     border-radius: 25px;
-    margin-top: 10px;
     overflow-x: scroll;
     overflow-y: clip;
     color: #d9d9d9;
@@ -512,7 +510,12 @@ nav ul a {
 
 .crown .project {
     padding: 5px 20px;
-    transition: all 50ms linear;
+    background: #4d194d00;
+    box-shadow: 0;
+    backdrop-filter: 0;
+    border-radius: 10px;
+    transition: all linear;
+    animation: fadeout 1s;
 }
 
 .crown img {
@@ -524,14 +527,43 @@ nav ul a {
     text-align: center;
 }
 
-.crown .active {
+.crown .project.active {
+    padding: 5px 20px;
     background: #4D194D;
     box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%);
     backdrop-filter: blur(14px);
-    border-radius: 25px;
+    animation: fadein 1s;
 }
 
-.crown .active img {
+@keyframes fadein {
+    0% {
+        background: #4d194d00;
+        box-shadow: 0;
+        backdrop-filter: 0;
+    }
+
+    100% {
+        background: #4D194D;
+        box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%);
+        backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        background: #4D194D;
+        box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%);
+        backdrop-filter: blur(14px);
+    }
+
+    100% {
+        background: #4d194d00;
+        box-shadow: 0;
+        backdrop-filter: 0;
+    }
+}
+
+.crown img {
     filter: drop-shadow(-10px 21px 2px rgba(0, 0, 0, 0.25));
 }
 
@@ -548,11 +580,14 @@ nav ul a {
     scrollbar-width: none;
     /* Firefox */
 }
-.crown-bg{
+
+.crown-bg {
     position: absolute;
     padding: 0;
     height: 80px;
     width: 100%;
     max-width: calc(80% + 40px);
-    border: 2px solid #ffffff0a;
+    border-top: 2px solid #ffffff0a;
+    z-index: -1;
+    border-radius: 50% /27%;
 }

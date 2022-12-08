@@ -205,34 +205,20 @@ function myFunction() {
 
 
 //// projects crown
-
-
 const projects = document.getElementsByClassName("project");
 
 const crown = document.getElementsByClassName("crown")[0];
 
-crown.onscroll = function () { crownMove() }
-
-function crownMove() {
-    let crownData = crown.getBoundingClientRect();
-    for (let i = 0; i < projects.length; i++) {
-        const project = projects[i];
-        let data = project.getBoundingClientRect()
-        let projectLimet = ((crownData.width / 2) - (data.width / 2)) + (data.width / 2)
-        let projectCo = ((data.x) - (crownData.x)) + (data.width / 2)
-        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - crownData.width / 2) / (crownData.width / 2)) + 0.2
-        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
-    }
-}
-crownMove()
-
 const opjects = []
-for (const project of projects) {
+
+let i = 0
+while ( i < projects.length && projects.length<20 ) {
+    const project = projects[i];
     let project2 = project.cloneNode(true)
     crown.appendChild(project2);
     opjects.push(project2)
+    i++
 }
-console.log(opjects);
 // Create a copy of the table and adds it to the scrollable element
 
 
@@ -246,8 +232,36 @@ const callback = (entries) => {
     if (!entries[0].isIntersecting) {
         // table1 is out of bounds, we can crown back to it
         crown.scrollLeft = 0;
+        crownMove()
     }
 }
 
 const observer = new IntersectionObserver(callback, options);
 observer.observe(opjects[0]);
+
+
+
+
+crown.onscroll = function () { crownMove() }
+
+function crownMove() {
+    let crownData = crown.getBoundingClientRect();
+    for (let i = 0; i < projects.length; i++) {
+        const project = projects[i];
+        let data = project.getBoundingClientRect()
+        let projectLimet = (crownData.width / 2)  
+        let projectCo = ((data.x) - (crownData.x)) + (data.width / 2)
+        let closer =  (Math.abs(Math.abs(projectLimet - projectCo) - crownData.width / 2) / (crownData.width / 2)) + 0.2
+        closer = closer > 1.2 ? 0.2 :closer
+        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+
+        // console.log(data.x, crownData.width , "op"+(i+1));
+        if (data.x > 0 && data.x < crownData.width &&closer>1.1) {
+            project.classList.add("active")
+        }else{
+            project.classList.remove("active")
+        }
+    }
+}
+
+crownMove()
