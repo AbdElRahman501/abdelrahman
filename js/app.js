@@ -132,7 +132,7 @@ function scrollToSection(theSection) {
     // sum of the section Y offset to window Y Offset will get back the position of the section
     let windowYOffset = window.pageYOffset;
     // add 50 px to make it a little more under the nav bar 
-    let sectionLocation = sectionYOffset + windowYOffset -100
+    let sectionLocation = sectionYOffset + windowYOffset - 100
     //let's scroll to the section Location smooth with scrollTo();
     window.scrollTo(({
         top: sectionLocation,
@@ -178,25 +178,90 @@ function initSkillSection() {
         let num = rate * 100;
         let value = 0;
 
-       let theInterval = setInterval(() => {
+        let theInterval = setInterval(() => {
             if (value < num) {
                 value++
-            }else{
+            } else {
                 clearInterval(theInterval)
             }
-            skill.lastElementChild.innerHTML = "<p>"+value + "</p>" 
+            skill.lastElementChild.innerHTML = "<p>" + value + "</p>"
         }, 50);
     }
 }
 
 ///// scroll eventListener
 
-document.addEventListener('scroll', function () {
-    // excute the same function for all sections
+
+window.onscroll = function () { myFunction() };
+
+function myFunction() {
     for (let i = 0; i < sections.length; i++) {
         // we need to call the function on scrolling 
         activate(sections[i])
     }
     isApeard(skillsList)
 
-});
+}
+
+
+//// projects crown
+const projects = document.getElementsByClassName("project");
+
+const crown = document.getElementsByClassName("crown")[0];
+
+const opjects = []
+
+let i = 0
+while ( i < projects.length && projects.length<20 ) {
+    const project = projects[i];
+    let project2 = project.cloneNode(true)
+    crown.appendChild(project2);
+    opjects.push(project2)
+    i++
+}
+// Create a copy of the table and adds it to the scrollable element
+
+
+const options = {
+    root: crown,
+    rootMargin: '0px',
+    threshold: 0
+}
+
+const callback = (entries) => {
+    if (!entries[0].isIntersecting) {
+        // table1 is out of bounds, we can crown back to it
+        crown.scrollLeft = 0;
+        crownMove()
+    }
+}
+
+const observer = new IntersectionObserver(callback, options);
+observer.observe(opjects[0]);
+
+
+
+
+crown.onscroll = function () { crownMove() }
+
+function crownMove() {
+    let crownData = crown.getBoundingClientRect();
+    for (let i = 0; i < projects.length; i++) {
+        const project = projects[i];
+        let data = project.getBoundingClientRect()
+        let projectLimet = (crownData.width / 2)  
+        let projectCo = ((data.x) - (crownData.x)) + (data.width / 2)
+        let closer =  (Math.abs(Math.abs(projectLimet - projectCo) - crownData.width / 2) / (crownData.width / 2)) + 0.2
+        closer = closer > 1.2 ? 0.2 :closer
+        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+
+        // console.log(data.x, crownData.width , "op"+(i+1));
+        if (data.x > 0 && data.x < crownData.width &&closer>1.1) {
+            project.classList.add("active")
+        }else{
+            project.classList.remove("active")
+        }
+    }
+}
+
+crownMove()
