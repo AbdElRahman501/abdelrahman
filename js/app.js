@@ -240,7 +240,7 @@ loopScroll()
 //for crown move 
 
 slider.onscroll = function () { crownMove() }
-
+let num = 0
 function crownMove() {
     let sliderData = slider.getBoundingClientRect();
 
@@ -257,6 +257,7 @@ function crownMove() {
         //add active clas to the center project
         if (sliderData.width / 2 < (data.x - sliderData.x) + data.width && sliderData.width / 2 > (data.x - sliderData.x)) {
             project.classList.add("active")
+            num = (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2))
 
         } else {
             project.classList.remove("active")
@@ -275,13 +276,46 @@ function crownMove() {
     }
 }
 crownMove()
+let touching = true
+let isScrolling;
+let scrolling = false
 
-let num = 0
+slider.addEventListener('touchstart', () => {
+    touching = true
+
+})
+
 slider.addEventListener('touchend', () => {
-    let active = slider.querySelector(".active")
-    num = active ? (active.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (active.offsetWidth / 2)) : num
-    slider.scrollTo(({
-        left: num,
-        behavior: 'smooth',
-    }))
+    touching = false
+    if (!scrolling) {
+        slider.scrollTo(({
+            left: num,
+            behavior: 'smooth',
+        }))
+    }
 });
+
+
+
+// Listen for scroll events
+slider.addEventListener('scroll', function (event) {
+
+    // Clear our timeout throughout the scroll
+    window.clearTimeout(isScrolling);
+    scrolling = true
+    // Set a timeout to run after scrolling ends
+    isScrolling = setTimeout(function () {
+
+        // Run the callback
+        scrolling = false
+        if (!touching) {
+            slider.scrollTo(({
+                left: num,
+                behavior: 'smooth',
+            }))
+        }
+
+
+    }, 66);
+
+}, false);
