@@ -15,6 +15,7 @@ hr {
     border-top: 10px dotted #1b3a4b;
     width: 10%;
     margin: 50px auto;
+    padding: 5px;
 }
 
 p {
@@ -517,7 +518,7 @@ nav ul a {
     backdrop-filter: 0;
     border-radius: 10px;
     transition: all linear;
-    animation: fadeout 1s;
+    /* animation: fadeout 1s; */
 }
 
 .crown img {
@@ -530,14 +531,15 @@ nav ul a {
 }
 
 .crown .project.active {
-    padding: 5px 20px;
-    background: #1B3A4B;
-    box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%);
-    backdrop-filter: blur(14px);
-    animation: fadein 1s;
+    border-bottom:1px solid #1B3A4B;
+    /* padding: 5px 20px;
+    background: #1B3A4B; 
+    box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%); 
+    backdrop-filter: blur(14px); 
+    animation: fadein 1s; */
 }
 
-@keyframes fadein {
+/* @keyframes fadein {
     0% {
         background: #4d194d00;
         box-shadow: 0;
@@ -563,9 +565,9 @@ nav ul a {
         box-shadow: 0;
         backdrop-filter: 0;
     }
-}
+} */
 
-.crown img {
+.crown .active img {
     filter: drop-shadow(-10px 21px 2px rgba(0, 0, 0, 0.25));
 }
 

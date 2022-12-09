@@ -209,6 +209,12 @@ const projects = document.getElementsByClassName("project");
 const crown = document.getElementsByClassName("crown")[0];
 const slider = document.getElementsByClassName("slider")[0];
 
+let touching = true
+let isScrolling;
+let scrolling = false
+
+let num = 0
+
 
 function loopScroll() {
     const crown2 = crown.cloneNode(true)
@@ -240,10 +246,11 @@ loopScroll()
 //for crown move 
 
 slider.onscroll = function () { crownMove() }
-let num = 0
+
 function crownMove() {
     let sliderData = slider.getBoundingClientRect();
-
+    window.clearTimeout(isScrolling);
+    scrolling = true
     for (let i = 0; i < projects.length; i++) {
         const project = projects[i];
         let data = project.getBoundingClientRect()
@@ -262,23 +269,36 @@ function crownMove() {
         } else {
             project.classList.remove("active")
         }
-        // project.addEventListener('click', () => {
-        //    let num = project ? (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2)) : num
-        //     slider.scrollTo(({
-        //         left: num,
-        //         behavior: 'smooth',
-        //     }))
-        // });
+        project.addEventListener('click', () => {
+           let thnum = (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2))
+            slider.scrollTo(({
+                left: thnum,
+                behavior: 'smooth',
+            }))
+        });
         //make it slide in the center 
         //  console.log((data.x - sliderData.x),project.offsetLeft -slider.offsetLeft-project.offsetWidth , data.x + data.width, sliderData.width / 2, "op" + (i + 1));
         // console.log( sliderData.width / 2 < data.x + data.width &&sliderData.width / 2 >data.x &&  "op" + (i + 1));
 
     }
+    
+    // Set a timeout to run after scrolling ends
+    isScrolling = setTimeout(function () {
+
+        // Run the callback
+        scrolling = false
+        if (!touching) {
+            slider.scrollTo(({
+                left: num,
+                behavior: 'smooth',
+            }))
+        }
+
+
+    }, 300);
 }
 crownMove()
-let touching = true
-let isScrolling;
-let scrolling = false
+
 
 slider.addEventListener('touchstart', () => {
     touching = true
@@ -294,28 +314,3 @@ slider.addEventListener('touchend', () => {
         }))
     }
 });
-
-
-
-// Listen for scroll events
-slider.addEventListener('scroll', function (event) {
-
-    // Clear our timeout throughout the scroll
-    window.clearTimeout(isScrolling);
-    scrolling = true
-    // Set a timeout to run after scrolling ends
-    isScrolling = setTimeout(function () {
-
-        // Run the callback
-        scrolling = false
-        if (!touching) {
-            slider.scrollTo(({
-                left: num,
-                behavior: 'smooth',
-            }))
-        }
-
-
-    }, 66);
-
-}, false);
