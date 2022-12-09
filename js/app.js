@@ -206,62 +206,82 @@ function myFunction() {
 
 //// projects crown
 const projects = document.getElementsByClassName("project");
-
 const crown = document.getElementsByClassName("crown")[0];
-
-const opjects = []
-
-let i = 0
-while ( i < projects.length && projects.length<20 ) {
-    const project = projects[i];
-    let project2 = project.cloneNode(true)
-    crown.appendChild(project2);
-    opjects.push(project2)
-    i++
-}
-// Create a copy of the table and adds it to the scrollable element
+const slider = document.getElementsByClassName("slider")[0];
 
 
-const options = {
-    root: crown,
-    rootMargin: '0px',
-    threshold: 0
-}
+function loopScroll() {
+    const crown2 = crown.cloneNode(true)
+    slider.appendChild(crown2)
 
-const callback = (entries) => {
-    if (!entries[0].isIntersecting) {
-        // table1 is out of bounds, we can crown back to it
-        crown.scrollLeft = 0;
-        crownMove()
+    // Create a copy of the table and adds it to the scrollable element
+
+
+    const options = {
+        root: slider,
+        rootMargin: '0px',
+        threshold: 0
     }
+
+    const callback = (entries) => {
+        if (!entries[0].isIntersecting) {
+            // table1 is out of bounds, we can crown back to it
+            slider.scrollLeft = 0;
+            crownMove()
+        }
+    }
+
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(crown);
 }
-
-const observer = new IntersectionObserver(callback, options);
-observer.observe(opjects[0]);
+loopScroll()
 
 
+//for crown move 
 
-
-crown.onscroll = function () { crownMove() }
+slider.onscroll = function () { crownMove() }
 
 function crownMove() {
-    let crownData = crown.getBoundingClientRect();
+    let sliderData = slider.getBoundingClientRect();
+
     for (let i = 0; i < projects.length; i++) {
         const project = projects[i];
         let data = project.getBoundingClientRect()
-        let projectLimet = (crownData.width / 2)  
-        let projectCo = ((data.x) - (crownData.x)) + (data.width / 2)
-        let closer =  (Math.abs(Math.abs(projectLimet - projectCo) - crownData.width / 2) / (crownData.width / 2)) + 0.2
-        closer = closer > 1.2 ? 0.2 :closer
-        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+        let projectLimet = (sliderData.width / 2)
+        let projectCo = ((data.x) - (sliderData.x)) + (data.width / 2)
 
-        // console.log(data.x, crownData.width , "op"+(i+1));
-        if (data.x > 0 && data.x < crownData.width &&closer>1.1) {
+        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - sliderData.width / 2) / (sliderData.width / 2)) + 0.2
+        closer = closer > 1.2 ? 0.2 : closer
+        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+        // console.log(closer, data.x, sliderData.width, "op" + (i + 1));
+        //add active clas to the center project
+        if (sliderData.width / 2 < (data.x - sliderData.x) + data.width && sliderData.width / 2 > (data.x - sliderData.x)) {
             project.classList.add("active")
-        }else{
+
+        } else {
             project.classList.remove("active")
         }
+        // project.addEventListener('click', () => {
+        //    let num = project ? (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2)) : num
+        //     slider.scrollTo(({
+        //         left: num,
+        //         behavior: 'smooth',
+        //     }))
+        // });
+        //make it slide in the center 
+        //  console.log((data.x - sliderData.x),project.offsetLeft -slider.offsetLeft-project.offsetWidth , data.x + data.width, sliderData.width / 2, "op" + (i + 1));
+        // console.log( sliderData.width / 2 < data.x + data.width &&sliderData.width / 2 >data.x &&  "op" + (i + 1));
+
     }
 }
-
 crownMove()
+
+let num = 0
+slider.addEventListener('touchend', () => {
+    let active = slider.querySelector(".active")
+    num = active ? (active.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (active.offsetWidth / 2)) : num
+    slider.scrollTo(({
+        left: num,
+        behavior: 'smooth',
+    }))
+});
