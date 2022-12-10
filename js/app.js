@@ -372,6 +372,6 @@ function swipeLeftToRight() {
     document.getElementById("social-box").setAttribute("style", 'left: 20px;')
     isScrolling = setTimeout(function () {
         document.getElementById("social-box").setAttribute("style", '')
-    }, 5000)
+    }, 10000)
 
 }
