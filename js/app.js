@@ -253,7 +253,7 @@ function crownAction(theSlider, theProjects) {
         let callback = (entries) => {
             if (!entries[0].isIntersecting) {
                 // table1 is out of bounds, we can crown back to it
-                theSlider.scrollLeft = num - theNum - 0.5;
+                theSlider.scrollLeft = num - theNum + secProject.offsetWidth ;
             }
 
         }
@@ -261,8 +261,6 @@ function crownAction(theSlider, theProjects) {
         let observer = new IntersectionObserver(callback, options);
         observer.observe(main);
     }
-    loopScroll(theSlider, 2)
-    crownMove()
     //for crown move 
     function biggerAtCenter(theProject, theSlider) {
         let sliderData = theSlider.getBoundingClientRect();
@@ -320,7 +318,8 @@ function crownAction(theSlider, theProjects) {
             }
         });
     }
-
+    loopScroll(theSlider, 2)
+    crownMove()
     touchDefine(theSlider)
 
     scrollHorizontalTo(theSlider, num)
