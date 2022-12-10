@@ -178,8 +178,13 @@ nav ul a {
     bottom: 60px;
     left: 20px;
     z-index: 1;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-
+@media only screen and (max-width: 400px) {
+    #social-box {
+        left: -20px;
+    }
+}
 #social-box ul {
     display: grid;
     align-content: center;

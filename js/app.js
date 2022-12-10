@@ -112,7 +112,7 @@ function leavHomeSection(id) {
         linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);`)
         document.getElementById("shapes").classList.remove("out-home")
         document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#1B3A4B;`)
-
+        document.getElementById("social-box").setAttribute("style", 'left: 20px;')
     } else {
         document.getElementsByTagName("nav")[0].setAttribute("style", "bottom: calc(100% - 65px);")
         // document.getElementById("shapes").setAttribute("style", "background-color: #182333;")
@@ -120,6 +120,7 @@ function leavHomeSection(id) {
         linear-gradient(180deg, #212F45 0%, #0B1018 100%);`)
         document.getElementById("shapes").classList.add("out-home")
         document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#222138;`)
+        document.getElementById("social-box").setAttribute("style", '')
     }
 }
 
@@ -202,7 +203,7 @@ function myFunction() {
     isApeard(skillsList)
 
 }
-
+myFunction()
 
 //// projects crown
 const projects = document.getElementsByClassName("project");
@@ -224,39 +225,44 @@ function crownAction(theSlider, theProjects) {
             //add active class to the center project
             activateTheCenter(project, theSlider)
             //scroll left to project when click
-            let theNum = (project.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (project.offsetWidth / 2))
-            project.addEventListener('click', () => { scrollHorizontalTo(theSlider, theNum) });
+            project.addEventListener('click', () => {
+                num = (project.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (project.offsetWidth / 2))
+                scrollHorizontalTo(theSlider, num)
+            });
         }
     }
-    crownMove()
 
 
     function loopScroll(theSlider, len) {
-        let main = theSlider.firstElementChild
+        let main = theSlider.firstElementChild;
         for (let i = 0; i < len; i++) {
             let clone = main.cloneNode(true)
             theSlider.appendChild(clone)
         }
+        let padd = (theSlider.offsetWidth / 2) - (projects[0].offsetWidth / 2);
+        main.setAttribute("style", "padding-left: " + padd + "px;")
         // Create a copy of the table and adds it to the scrollable element
         let options = {
             root: theSlider,
             rootMargin: '0px',
             threshold: 0
         }
+        let secProject = slider.childNodes[3].firstElementChild
+        let theNum = (secProject.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (secProject.offsetWidth / 2))
 
         let callback = (entries) => {
             if (!entries[0].isIntersecting) {
                 // table1 is out of bounds, we can crown back to it
-                theSlider.scrollLeft = 0;
+                theSlider.scrollLeft = num - theNum - 0.5;
             }
+
         }
 
         let observer = new IntersectionObserver(callback, options);
         observer.observe(main);
     }
     loopScroll(theSlider, 2)
-
-
+    crownMove()
     //for crown move 
     function biggerAtCenter(theProject, theSlider) {
         let sliderData = theSlider.getBoundingClientRect();
@@ -318,8 +324,55 @@ function crownAction(theSlider, theProjects) {
     touchDefine(theSlider)
 
     scrollHorizontalTo(theSlider, num)
+
+
 }
 
 
 crownAction(slider, projects)
 
+
+
+//for social media 
+
+// window.addEventListener("touchstart" , (e) => {
+//     console.log( e ,e.changedTouches[0].clientX , e.changedTouches[0].clientY  );
+// })
+
+window.addEventListener("touchstart", touchStart, false)
+window.addEventListener("touchend", touchEnd, false)
+
+
+var xStart, yStart
+
+function touchStart(e) {
+
+    xStart = e.changedTouches[0].clientX
+    yStart = e.changedTouches[0].clientY
+
+
+
+}
+
+function touchEnd(e) {
+    var xEnd = e.changedTouches[0].clientX, yEnd = e.changedTouches[0].clientY // store the pageX and pageY in variables for readability
+
+    if (Math.abs(yStart - yEnd) < 100) // if there was not a lot of vertical movement
+    {
+        if (xEnd - xStart > 200) // at least 200 pixels horizontal swipe (to the right)
+        {
+            if (xStart < 40 && yStart > 500) {
+                swipeLeftToRight()
+            }
+            // swipe recognized
+        }
+
+    }
+}
+function swipeLeftToRight() {
+    document.getElementById("social-box").setAttribute("style", 'left: 20px;')
+    isScrolling = setTimeout(function () {
+        document.getElementById("social-box").setAttribute("style", '')
+    }, 5000)
+
+}
