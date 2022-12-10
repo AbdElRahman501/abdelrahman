@@ -206,111 +206,120 @@ function myFunction() {
 
 //// projects crown
 const projects = document.getElementsByClassName("project");
-const crown = document.getElementsByClassName("crown")[0];
 const slider = document.getElementsByClassName("slider")[0];
 
-let touching = true
-let isScrolling;
-let scrolling = false
 
-let num = 0
+function crownAction(theSlider, theProjects) {
+    let touching = false
+    let isScrolling;
+    let scrolling = false
 
+    let num = 0
 
-function loopScroll() {
-    const crown2 = crown.cloneNode(true)
-    slider.appendChild(crown2)
-
-    // Create a copy of the table and adds it to the scrollable element
-
-
-    const options = {
-        root: slider,
-        rootMargin: '0px',
-        threshold: 0
-    }
-
-    const callback = (entries) => {
-        if (!entries[0].isIntersecting) {
-            // table1 is out of bounds, we can crown back to it
-            slider.scrollLeft = 0;
-            crownMove()
+    theSlider.onscroll = function () { crownMove(); scrollingDefiner(theSlider) }
+    function crownMove() {
+        for (const project of theProjects) {
+            //make the center bigger
+            biggerAtCenter(project, theSlider)
+            //add active class to the center project
+            activateTheCenter(project, theSlider)
+            //scroll left to project when click
+            let theNum = (project.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (project.offsetWidth / 2))
+            project.addEventListener('click', () => { scrollHorizontalTo(theSlider, theNum) });
         }
     }
-
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(crown);
-}
-loopScroll()
+    crownMove()
 
 
-//for crown move 
+    function loopScroll(theSlider, len) {
+        let main = theSlider.firstElementChild
+        for (let i = 0; i < len; i++) {
+            let clone = main.cloneNode(true)
+            theSlider.appendChild(clone)
+        }
+        // Create a copy of the table and adds it to the scrollable element
+        let options = {
+            root: theSlider,
+            rootMargin: '0px',
+            threshold: 0
+        }
 
-slider.onscroll = function () { crownMove() }
+        let callback = (entries) => {
+            if (!entries[0].isIntersecting) {
+                // table1 is out of bounds, we can crown back to it
+                theSlider.scrollLeft = 0;
+            }
+        }
 
-function crownMove() {
-    let sliderData = slider.getBoundingClientRect();
-    window.clearTimeout(isScrolling);
-    scrolling = true
-    for (let i = 0; i < projects.length; i++) {
-        const project = projects[i];
-        let data = project.getBoundingClientRect()
+        let observer = new IntersectionObserver(callback, options);
+        observer.observe(main);
+    }
+    loopScroll(theSlider, 2)
+
+
+    //for crown move 
+    function biggerAtCenter(theProject, theSlider) {
+        let sliderData = theSlider.getBoundingClientRect();
+        let data = theProject.getBoundingClientRect()
         let projectLimet = (sliderData.width / 2)
         let projectCo = ((data.x) - (sliderData.x)) + (data.width / 2)
-
-        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - sliderData.width / 2) / (sliderData.width / 2)) + 0.2
+        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - projectLimet) / projectLimet) + 0.2;
         closer = closer > 1.2 ? 0.2 : closer
-        project.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
-        // console.log(closer, data.x, sliderData.width, "op" + (i + 1));
-        //add active clas to the center project
+
+        theProject.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
+    }
+    function activateTheCenter(theProject, theSlider) {
+        let sliderData = theSlider.getBoundingClientRect();
+        let data = theProject.getBoundingClientRect()
         if (sliderData.width / 2 < (data.x - sliderData.x) + data.width && sliderData.width / 2 > (data.x - sliderData.x)) {
-            project.classList.add("active")
-            num = (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2))
+            theProject.classList.add("active")
+            num = (theProject.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (theProject.offsetWidth / 2))
 
         } else {
-            project.classList.remove("active")
+            theProject.classList.remove("active")
         }
-        project.addEventListener('click', () => {
-           let thnum = (project.offsetLeft - slider.offsetLeft) - ((slider.offsetWidth / 2) - (project.offsetWidth / 2))
-            slider.scrollTo(({
-                left: thnum,
-                behavior: 'smooth',
-            }))
-        });
-        //make it slide in the center 
-        //  console.log((data.x - sliderData.x),project.offsetLeft -slider.offsetLeft-project.offsetWidth , data.x + data.width, sliderData.width / 2, "op" + (i + 1));
-        // console.log( sliderData.width / 2 < data.x + data.width &&sliderData.width / 2 >data.x &&  "op" + (i + 1));
-
     }
-    
-    // Set a timeout to run after scrolling ends
-    isScrolling = setTimeout(function () {
-
-        // Run the callback
-        scrolling = false
-        if (!touching) {
-            slider.scrollTo(({
-                left: num,
-                behavior: 'smooth',
-            }))
-        }
-
-
-    }, 300);
-}
-crownMove()
-
-
-slider.addEventListener('touchstart', () => {
-    touching = true
-
-})
-
-slider.addEventListener('touchend', () => {
-    touching = false
-    if (!scrolling) {
-        slider.scrollTo(({
-            left: num,
+    function scrollHorizontalTo(theSlider, theNum) {
+        theSlider.scrollTo(({
+            left: theNum,
             behavior: 'smooth',
         }))
     }
-});
+
+    //definers
+    function scrollingDefiner(theSlider) {
+        window.clearTimeout(isScrolling);
+        scrolling = true
+        isScrolling = setTimeout(function () {
+            // Run the callback
+            scrolling = false
+            if (!touching) {
+                theSlider.scrollTo(({
+                    left: num,
+                    behavior: 'smooth',
+                }))
+            }
+        }, 300);
+    }
+    function touchDefine(theSlider) {
+        theSlider.addEventListener('touchstart', () => {
+            touching = true
+
+        })
+
+        theSlider.addEventListener('touchend', () => {
+            touching = false
+            if (!scrolling) {
+                scrollHorizontalTo(theSlider, num)
+            }
+        });
+    }
+
+    touchDefine(theSlider)
+
+    scrollHorizontalTo(theSlider, num)
+}
+
+
+crownAction(slider, projects)
+
