@@ -521,7 +521,12 @@ nav ul a {
     align-items: center;
     justify-content: start;
 }
-
+.my-work-description{
+    transition: all 1s linear;
+}
+#my-work .content div:first-child{
+    width: 100%;
+}
 .crown .project {
     padding: 5px 20px;
     background: #4d194d00;
@@ -530,7 +535,12 @@ nav ul a {
     border-radius: 10px;
     transition: all linear;
 }
-
+.project .name{
+    font-size: 12px;
+}
+.project .description{
+    display: none;
+}
 .crown img {
     width: 85px;
 }
