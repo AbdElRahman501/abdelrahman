@@ -125,6 +125,26 @@ function leaveHomeSection(id) {
     }
 }
 
+function editSocialBox() {
+    let body = document.body
+    let height = body.scrollHeight - body.offsetHeight;
+    let wy = height- window.pageYOffset;
+    let homeSec = document.getElementById("home").getBoundingClientRect().height;
+    if (wy <= 30 ) {
+        document.getElementById("social-box").firstElementChild.setAttribute("style", `display: flex;justify-content: space-evenly`)
+        let width = document.getElementById("social-box").getBoundingClientRect().width ;
+        let left = (screen.width/2)-(width/2) ;
+        document.getElementById("social-box").setAttribute("style", `bottom: 0;left:${left}px`)
+        
+    } else if(window.pageYOffset>=homeSec) {
+        document.getElementById("social-box").setAttribute("style", ``)
+        document.getElementById("social-box").firstElementChild.setAttribute("style", ``)
+    }
+}
+function delay (URL) {
+    setTimeout( function() { window.open(URL, "_blank") }, 500 );
+}
+
 let navLinks = document.getElementsByClassName("nav-link")
 
 // make function that scroll to the section with id
@@ -194,7 +214,7 @@ function initSkillSection() {
 ///// scroll eventListener
 
 
-window.onscroll = function () { myFunction() };
+window.onscroll = function () { myFunction(); editSocialBox(); };
 
 function myFunction() {
     for (let i = 0; i < sections.length; i++) {
@@ -296,16 +316,26 @@ function crownAction(theSlider, theProjects) {
         if (myActiveWork.name != name) {
             myWork.querySelector(".my-work-model").setAttribute("src", myActiveWork.image)
             myWork.querySelector(".my-work-name").textContent = myActiveWork.name;
-            myWork.querySelector(".my-work-description").textContent = myActiveWork.disc.slice(0, 200) + (myActiveWork.disc.length > 200 ? "..." : "");
+            let readMore = `<a class="read-more">...readmore</a>`
+            let slicedWork = myActiveWork.disc.slice(0, 200) + (myActiveWork.disc.length > 200 ? readMore : "")
+            myWork.querySelector(".my-work-description").innerHTML = slicedWork
+            document.querySelector(".read-more")?.addEventListener("click", () => {
+                myWork.querySelector(".my-work-description").innerHTML = myActiveWork.disc
+            })
         }
 
-        if (screen.width < 1000 && document.getElementById("portfolio").getBoundingClientRect().y < 0 ) {
+        if (document.getElementById("portfolio").getBoundingClientRect().y < 300) {
             let theSection = document.getElementById("fixed-slider")
             let sectionYOffset = theSection.getBoundingClientRect().y;
             let windowYOffset = window.pageYOffset;
-            let sectionLocation =  sectionYOffset + windowYOffset - screen.height +theSection.getBoundingClientRect().height
+
+            let sectionLocation = sectionYOffset + windowYOffset - screen.height + theSection.getBoundingClientRect().height;
+            let browserZoomLevel = Math.round(window.devicePixelRatio * 100) >= 100
+                && Math.round(window.devicePixelRatio * 100) < 150
+                ? (screen.height * (0.1 + (1 - (100 / Math.round(window.devicePixelRatio * 100)))))
+                : 0
             window.scrollTo(({
-                top: sectionLocation,
+                top: sectionLocation + browserZoomLevel,
                 behavior: 'auto',
 
             }))

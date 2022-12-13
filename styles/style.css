@@ -40,7 +40,10 @@ h1 {
 ul {
     list-style: none;
 }
-
+a.none{
+    text-decoration: none;
+    color: unset;
+}
 .content {
     display: flex;
     justify-content: center;
@@ -521,25 +524,37 @@ nav ul a {
     align-items: center;
     justify-content: start;
 }
-.my-work-description{
+
+.my-work-description {
     transition: all 1s linear;
 }
-#my-work .content div:first-child{
+
+#my-work .content div:first-child {
     width: 100%;
 }
+
 .crown .project {
-    padding: 5px 20px;
+    /* padding: 5px 20px;  */
     background: #4d194d00;
     box-shadow: 0;
     backdrop-filter: 0;
     border-radius: 10px;
     transition: all linear;
+    display: grid;
+    width: 125px;
+    justify-content: center;
 }
-.project .name{
+
+.project .name {
     font-size: 12px;
 }
-.project .description{
+
+.project .description {
     display: none;
+}
+.my-work-description .read-more{
+    cursor: pointer;
+    color: #5252c7;
 }
 .crown img {
     width: 85px;
