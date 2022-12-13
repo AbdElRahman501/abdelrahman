@@ -335,7 +335,7 @@ function crownAction(theSlider, theProjects) {
                 ? (screen.height * (0.1 + (1 - (100 / Math.round(window.devicePixelRatio * 100)))))
                 : 0
             window.scrollTo(({
-                top: sectionLocation + browserZoomLevel+20,
+                top: sectionLocation + browserZoomLevel+80,
                 behavior: 'auto',
 
             }))
