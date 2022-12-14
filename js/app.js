@@ -113,7 +113,7 @@ function leaveHomeSection(id) {
         linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);`)
         document.getElementById("shapes").classList.remove("out-home")
         document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#1B3A4B;`)
-        document.getElementById("social-box").setAttribute("style", 'left: 20px;')
+        document.getElementById("social-box").setAttribute("style", 'right: 20px;')
     } else {
         document.getElementsByTagName("nav")[0].setAttribute("style", "bottom: calc(100% - 65px);")
         // document.getElementById("shapes").setAttribute("style", "background-color: #182333;")
@@ -376,7 +376,7 @@ function crownAction(theSlider, theProjects) {
             }
         });
     }
-    loopScroll(theSlider, 2)
+    loopScroll(theSlider, 3)
     crownMove()
     touchDefine(theSlider)
 
@@ -413,12 +413,13 @@ let swipeBack;
 
 function touchEnd(e) {
     var xEnd = e.changedTouches[0].clientX, yEnd = e.changedTouches[0].clientY // store the pageX and pageY in variables for readability
-
+    let height = document.body.scrollHeight - document.body.offsetHeight;
+    let wy = height - window.pageYOffset;
     if (Math.abs(yStart - yEnd) < 100) // if there was not a lot of vertical movement
     {
-        if (xEnd - xStart > 50) // at least 200 pixels horizontal swipe (to the right)
+        if (xStart - xEnd > 50) // at least 50 pixels horizontal swipe (to the right)
         {
-            if (xStart < (screen.width * 0.5) && yStart > (screen.height * 0.3)) {
+            if (xStart >= (screen.width * 0.5) && yStart >= (screen.height * 0.3) && wy > 30) {
                 window.clearTimeout(swipeBack);
                 swipeLeftToRight()
             }
@@ -429,7 +430,7 @@ function touchEnd(e) {
 }
 function swipeLeftToRight() {
 
-    document.getElementById("social-box").setAttribute("style", 'left: 20px;')
+    document.getElementById("social-box").setAttribute("style", 'right: 20px;')
     swipeBack = setTimeout(function () {
         document.getElementById("social-box").setAttribute("style", '')
     }, 10000)

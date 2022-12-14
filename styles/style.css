@@ -1,7 +1,53 @@
+/* .lightmode {
+    --primary-background-color: #999;
+    --primary-background-revers-color: #141517;
+    --primary-text-color: #141517;
+    --primary-text-rev-color: #fff;
+    --secoundry-text-color: rgb(61, 61, 61);
+    --place-holder: #505050;
+    --secounder-background-color: #cdcdcd;
+
+    --icon-filter: none;
+    --icon-filter-hover: invert(1) sepia(4%) saturate(768%) hue-rotate(167deg) brightness(700%) contrast(92%);
+}
+
+.darkemode {
+    --primary-background-color: #141517;
+    --primary-background-revers-color: #999;
+    --primary-text-color: rgb(238, 238, 238);
+    --primary-text-rev-color: #000;
+    --secoundry-text-color: #999;
+    --secounder-background-color: #1e1e1e;
+    --place-holder: #505050;
+    --icon-filter: invert(1) sepia(4%) saturate(768%) hue-rotate(167deg) brightness(700%) contrast(92%);
+    --icon-filter-hover: none;
+}
+ */
+
 body {
     margin: 0;
     font-family: 'Inter', system-ui;
     height: 100vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #1b3a4b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #22475b;
 }
 
 /* common */
@@ -40,11 +86,13 @@ h1 {
 ul {
     list-style: none;
 }
-a.none{
+
+a.none {
     text-decoration: none;
     color: unset;
     cursor: pointer;
 }
+
 .content {
     display: flex;
     justify-content: center;
@@ -180,14 +228,14 @@ nav ul a {
 #social-box {
     position: fixed;
     bottom: 60px;
-    left: 20px;
+    right: 20px;
     z-index: 1;
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @media only screen and (max-width: 600px) {
     #social-box {
-        left: -20px;
+        right: -20px;
     }
 }
 
@@ -553,10 +601,12 @@ nav ul a {
 .project .description {
     display: none;
 }
-.my-work-description .read-more{
+
+.my-work-description .read-more {
     cursor: pointer;
     color: #5252c7;
 }
+
 .crown img {
     width: 85px;
 }
