@@ -128,21 +128,20 @@ function leaveHomeSection(id) {
 function editSocialBox() {
     let body = document.body
     let height = body.scrollHeight - body.offsetHeight;
-    let wy = height- window.pageYOffset;
+    let wy = height - window.pageYOffset;
     let homeSec = document.getElementById("home").getBoundingClientRect().height;
-    if (wy <= 30 ) {
-        document.getElementById("social-box").firstElementChild.setAttribute("style", `display: flex;justify-content: space-evenly`)
-        let width = document.getElementById("social-box").getBoundingClientRect().width ;
-        let left = (screen.width/2)-(width/2) ;
-        document.getElementById("social-box").setAttribute("style", `bottom: 0;left:${left}px`)
-        
-    } else if(window.pageYOffset>=homeSec) {
+    if (wy <= 30) {
+        document.getElementById("social-box").firstElementChild.setAttribute("style", `display: flex;justify-content: center;width: 100%;`)
+        document.getElementById("social-box").setAttribute("style", `bottom: 0;left: 0; width: 100%;`)
+
+    } else if (window.pageYOffset >= homeSec) {
         document.getElementById("social-box").setAttribute("style", ``)
         document.getElementById("social-box").firstElementChild.setAttribute("style", ``)
     }
 }
-function delay (URL) {
-    setTimeout( function() { window.open(URL, "_blank") }, 500 );
+
+function delay(URL) {
+    setTimeout(function () { window.open(URL, "_blank") }, 500);
 }
 
 let navLinks = document.getElementsByClassName("nav-link")
@@ -335,7 +334,7 @@ function crownAction(theSlider, theProjects) {
                 ? (screen.height * (0.1 + (1 - (100 / Math.round(window.devicePixelRatio * 100)))))
                 : 0
             window.scrollTo(({
-                top: sectionLocation + browserZoomLevel+80,
+                top: sectionLocation + browserZoomLevel + 80,
                 behavior: 'auto',
 
             }))
