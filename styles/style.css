@@ -1,12 +1,58 @@
+/* .lightmode {
+    --primary-background-color: #999;
+    --primary-background-revers-color: #141517;
+    --primary-text-color: #141517;
+    --primary-text-rev-color: #fff;
+    --secoundry-text-color: rgb(61, 61, 61);
+    --place-holder: #505050;
+    --secounder-background-color: #cdcdcd;
+
+    --icon-filter: none;
+    --icon-filter-hover: invert(1) sepia(4%) saturate(768%) hue-rotate(167deg) brightness(700%) contrast(92%);
+}
+
+.darkemode {
+    --primary-background-color: #141517;
+    --primary-background-revers-color: #999;
+    --primary-text-color: rgb(238, 238, 238);
+    --primary-text-rev-color: #000;
+    --secoundry-text-color: #999;
+    --secounder-background-color: #1e1e1e;
+    --place-holder: #505050;
+    --icon-filter: invert(1) sepia(4%) saturate(768%) hue-rotate(167deg) brightness(700%) contrast(92%);
+    --icon-filter-hover: none;
+}
+ */
+
 body {
     margin: 0;
     font-family: 'Inter', system-ui;
     height: 100vh;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #1b3a4b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #22475b;
+}
+
 /* common */
 section {
-    min-height: 100%;
+    min-height: 80%;
     padding-bottom: 50px;
 }
 
@@ -41,6 +87,12 @@ ul {
     list-style: none;
 }
 
+a.none {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+}
+
 .content {
     display: flex;
     justify-content: center;
@@ -51,7 +103,7 @@ ul {
     color: #d9d9d9;
     display: grid;
     font-family: system-ui;
-    width: 80%;
+    width: 75%;
 }
 
 .primary-btn {
@@ -66,7 +118,7 @@ ul {
     font-size: 16px;
     font-weight: 700;
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-
+    cursor: pointer;
 }
 
 .primary-btn:hover {
@@ -105,8 +157,8 @@ ul {
 
 @media only screen and (max-width: 600px) {
     #social-box .icon {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
     }
 }
 
@@ -176,8 +228,15 @@ nav ul a {
 #social-box {
     position: fixed;
     bottom: 60px;
-    left: 20px;
+    right: 20px;
     z-index: 1;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@media only screen and (max-width: 600px) {
+    #social-box {
+        right: -20px;
+    }
 }
 
 #social-box ul {
@@ -219,7 +278,7 @@ nav ul a {
 }
 
 #shapes.out-home line {
-    stroke: #10101c;
+    stroke: #531b53;
     transition: stroke 1s linear;
 }
 
@@ -297,7 +356,7 @@ nav ul a {
 
 .personal-image-container {
     width: 100%;
-    height: 45vh;
+    height: 40vh;
 }
 
 .personal-image-container div {
@@ -306,7 +365,7 @@ nav ul a {
     justify-content: center;
     align-items: center;
     display: flex;
-    height: 55%;
+    height: 45%;
     z-index: -1;
 }
 
@@ -493,16 +552,19 @@ nav ul a {
     width: 80%;
     max-width: 600px;
 }
-#portfolio .center-box{
+
+#portfolio .center-box {
     margin-top: 50px;
 }
+
 .crown {
     display: flex;
     gap: 20px;
     color: #d9d9d9;
     padding-right: 20px;
 }
-.slider{
+
+.slider {
     max-width: calc(80% + 40px);
     height: 150px;
     overflow-x: scroll;
@@ -512,13 +574,37 @@ nav ul a {
     justify-content: start;
 }
 
+.my-work-description {
+    transition: all 1s linear;
+}
+
+#my-work .content div:first-child {
+    width: 100%;
+}
+
 .crown .project {
-    padding: 5px 20px;
+    /* padding: 5px 20px;  */
     background: #4d194d00;
     box-shadow: 0;
     backdrop-filter: 0;
     border-radius: 10px;
     transition: all linear;
+    display: grid;
+    width: 125px;
+    justify-content: center;
+}
+
+.project .name {
+    font-size: 12px;
+}
+
+.project .description {
+    display: none;
+}
+
+.my-work-description .read-more {
+    cursor: pointer;
+    color: #5252c7;
 }
 
 .crown img {
@@ -531,8 +617,8 @@ nav ul a {
 }
 
 .crown .project.active {
-    border-bottom:1px solid #1B3A4B;
- 
+    border-bottom: 2px solid #1B3A4B;
+
 }
 
 .crown .active img {
@@ -554,6 +640,7 @@ nav ul a {
 }
 
 .crown-bg {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.33) 0%, rgba(39, 38, 64, 0.13) 25%, rgba(39, 38, 64, 0.13) 75%, rgba(0, 0, 0, 0.33) 100%);
     position: absolute;
     padding: 0;
     height: 80px;
@@ -562,4 +649,97 @@ nav ul a {
     border-top: 2px solid #ffffff0a;
     z-index: -1;
     border-radius: 50% /27%;
+}
+
+
+/* contact me  */
+
+/* #contact .grid-container{
+    max-width: calc(80% + 40px);
+} */
+#contact .grid-container .input {
+    display: grid;
+    width: 100%;
+    color: white;
+}
+
+#contact .grid-item {
+    width: 45%;
+    min-width: 300px;
+}
+
+#contact .grid-container .input input,
+#contact .grid-container .input textarea {
+    background: rgba(39, 38, 64, 0.33);
+    box-shadow: -10px 10px 50px 4px rgb(0 0 0 / 25%);
+    backdrop-filter: blur(14px);
+    border-radius: 25px;
+    border: 2px solid #fff0;
+    height: 50px;
+    padding: 0 10px;
+    margin: 10px 0;
+    color: white;
+    font-size: 14px;
+    font-family: system-ui;
+}
+
+input[type=text] {
+    transition: ease-in-out, width .35s ease-in-out;
+}
+
+#contact .grid-container .input input:focus,
+#contact .grid-container .input textarea:focus {
+    border: 2px solid #1b3a4b;
+    outline: none;
+}
+
+#contact .grid-container .input textarea {
+    height: unset;
+    padding: 10px;
+}
+
+#contact button {
+    margin: 30px;
+    padding: 16px 62px;
+    border-radius: 15px;
+    border: 0;
+    background: #1b3a4b;
+    color: white;
+    font-size: 20px;
+    font-family: 'Lobster';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#contact button path {
+    fill: white;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(255, 255, 255, 0.539);
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(255, 255, 255, 0.539);
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(255, 255, 255, 0.539);
+}
+
+@media only screen and (max-width: 700px) {
+    #contact .grid-item {
+        width: calc(80% + 40px);
+    }
+
+    #contact .grid-container:nth-child(2) .input {
+        width: calc(80% + 40px);
+    }
 }

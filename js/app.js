@@ -4,12 +4,12 @@
 
 const shapes = document.getElementsByClassName("shape")
 for (let i = 0; i < 8; i++) {
-    let shipesList = document.getElementById("shapes").firstElementChild
+    let shapesList = document.getElementById("shapes").firstElementChild
     let shapes = document.getElementsByClassName("shape")
     let newShape = document.createElement("li")
     newShape.classList.add("shape")
     newShape.innerHTML = shapes[1].innerHTML
-    shipesList.insertAdjacentElement("afterbegin", newShape)
+    shapesList.insertAdjacentElement("afterbegin", newShape)
 
 }
 let arrayTop = [];
@@ -25,8 +25,8 @@ function moveShapes() {
     }
     for (let i = 0; i < shapes.length; i++) {
         const shape = shapes[i];
-        let randomTop = getrandomnum(arrayTop, "top");
-        let randomRight = getrandomnum(arrayRight, "right");
+        let randomTop = getRandomNum(arrayTop, "top");
+        let randomRight = getRandomNum(arrayRight, "right");
         let randomWidth = randomTop < 30 ? getRandomIntInclusive(70, 120) : getRandomIntInclusive(30, 50);
         let blur = 50 / randomWidth
         // console.log({ randomTop, randomRight, randomWidth })
@@ -34,7 +34,7 @@ function moveShapes() {
         let svg = shape.firstElementChild
         svg.setAttribute('style', `width: ${randomWidth}px; filter: blur(${blur}px) `)
     }
-    function getrandomnum(array, type) {
+    function getRandomNum(array, type) {
         let num = Math.floor(Math.random() * array.length);
         let roll = array.splice(num - 1, 10);
         let yourNumber = roll.length % 2 === 0 ? roll[roll.length / 2] : roll[(roll.length - 1) / 2];
@@ -75,7 +75,7 @@ const sections = document.getElementsByTagName("section")
 function activate(theSection) {
     // add active to the menu-link
     let theLink = document.querySelectorAll(`[section="${theSection.id}"]`)[0]
-    // detrmin the Y offset of the section and want it to active when it apperd with 200 px 
+    // determine the Y offset of the section and want it to active when it appeared with 200 px 
     let sectionYOffset = theSection.getBoundingClientRect().y - 500;
     // to set it un active while it passes 
     let height = theSection.getBoundingClientRect().height;
@@ -85,12 +85,13 @@ function activate(theSection) {
 
     if (sectionYOffset < 0 && sectionYOffset + height > 0) {
         // to not added it many times
+
         if (!isActive) {
             theSection.classList.add("active")
             //add active class to menu link
             theLink.classList.add("active")
             // scrollToSection(theSection)
-            leavHomeSection(theSection.id)
+            leaveHomeSection(theSection.id)
         } else {
             return;
         }
@@ -104,7 +105,7 @@ function activate(theSection) {
 }
 
 
-function leavHomeSection(id) {
+function leaveHomeSection(id) {
     if (id === "home") {
         document.getElementsByTagName("nav")[0].setAttribute("style", "bottom:10px;")
         // document.getElementById("shapes").setAttribute("style", "background-color: #10101c;")
@@ -112,7 +113,7 @@ function leavHomeSection(id) {
         linear-gradient(179.75deg, #272640 1.54%, #11101C 78.16%, #07070D 97.46%);`)
         document.getElementById("shapes").classList.remove("out-home")
         document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#1B3A4B;`)
-
+        document.getElementById("social-box").setAttribute("style", 'right: 20px;')
     } else {
         document.getElementsByTagName("nav")[0].setAttribute("style", "bottom: calc(100% - 65px);")
         // document.getElementById("shapes").setAttribute("style", "background-color: #182333;")
@@ -120,19 +121,39 @@ function leavHomeSection(id) {
         linear-gradient(180deg, #212F45 0%, #0B1018 100%);`)
         document.getElementById("shapes").classList.add("out-home")
         document.getElementsByClassName("active")[0].setAttribute("style", `background-color:#222138;`)
+        document.getElementById("social-box").setAttribute("style", '')
     }
+}
+
+function editSocialBox() {
+    let body = document.body
+    let height = body.scrollHeight - body.offsetHeight;
+    let wy = height - window.pageYOffset;
+    let homeSec = document.getElementById("home").getBoundingClientRect().height;
+    if (wy <= 30) {
+        document.getElementById("social-box").firstElementChild.setAttribute("style", `display: flex;justify-content: center;width: 100%;`)
+        document.getElementById("social-box").setAttribute("style", `bottom: 0;left: 0; width: 100%;`)
+
+    } else if (window.pageYOffset >= homeSec) {
+        document.getElementById("social-box").setAttribute("style", ``)
+        document.getElementById("social-box").firstElementChild.setAttribute("style", ``)
+    }
+}
+
+function delay(URL) {
+    setTimeout(function () { window.open(URL, "_blank") }, 500);
 }
 
 let navLinks = document.getElementsByClassName("nav-link")
 
 // make function that scroll to the section with id
-function scrollToSection(theSection) {
+function scrollToSection(theSection, sub) {
     // get the Y Offset of that section
     let sectionYOffset = theSection.getBoundingClientRect().y;
     // sum of the section Y offset to window Y Offset will get back the position of the section
     let windowYOffset = window.pageYOffset;
     // add 50 px to make it a little more under the nav bar 
-    let sectionLocation = sectionYOffset + windowYOffset - 100
+    let sectionLocation = sub ? sectionYOffset + windowYOffset + sub : sectionYOffset + windowYOffset - 100
     //let's scroll to the section Location smooth with scrollTo();
     window.scrollTo(({
         top: sectionLocation,
@@ -157,7 +178,7 @@ let initialSkills = false
 
 
 
-function isApeard(theSection) {
+function isAppeared(theSection) {
     let sectionYOffset = theSection.getBoundingClientRect().y - 700;
     // to set it un active while it passes 
     let height = theSection.getBoundingClientRect().height;
@@ -192,22 +213,22 @@ function initSkillSection() {
 ///// scroll eventListener
 
 
-window.onscroll = function () { myFunction() };
+window.onscroll = function () { myFunction(); editSocialBox(); };
 
 function myFunction() {
     for (let i = 0; i < sections.length; i++) {
         // we need to call the function on scrolling 
         activate(sections[i])
     }
-    isApeard(skillsList)
+    isAppeared(skillsList)
 
 }
-
+myFunction()
 
 //// projects crown
 const projects = document.getElementsByClassName("project");
 const slider = document.getElementsByClassName("slider")[0];
-
+const myWork = document.getElementById("my-work")
 
 function crownAction(theSlider, theProjects) {
     let touching = false
@@ -224,46 +245,49 @@ function crownAction(theSlider, theProjects) {
             //add active class to the center project
             activateTheCenter(project, theSlider)
             //scroll left to project when click
-            let theNum = (project.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (project.offsetWidth / 2))
-            project.addEventListener('click', () => { scrollHorizontalTo(theSlider, theNum) });
+            project.addEventListener('click', () => {
+                num = (project.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (project.offsetWidth / 2))
+                scrollHorizontalTo(theSlider, num)
+            });
         }
     }
-    crownMove()
 
 
     function loopScroll(theSlider, len) {
-        let main = theSlider.firstElementChild
+        let main = theSlider.firstElementChild;
         for (let i = 0; i < len; i++) {
             let clone = main.cloneNode(true)
             theSlider.appendChild(clone)
         }
+        let pads = (theSlider.offsetWidth / 2) - (projects[0].offsetWidth / 2);
+        main.setAttribute("style", "padding-left: " + pads + "px;")
         // Create a copy of the table and adds it to the scrollable element
         let options = {
             root: theSlider,
             rootMargin: '0px',
             threshold: 0
         }
+        let secProject = slider.childNodes[3].firstElementChild
+        let theNum = (secProject.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (secProject.offsetWidth / 2))
 
         let callback = (entries) => {
             if (!entries[0].isIntersecting) {
                 // table1 is out of bounds, we can crown back to it
-                theSlider.scrollLeft = 0;
+                theSlider.scrollLeft = num - theNum;
             }
+
         }
 
         let observer = new IntersectionObserver(callback, options);
         observer.observe(main);
     }
-    loopScroll(theSlider, 2)
-
-
     //for crown move 
     function biggerAtCenter(theProject, theSlider) {
         let sliderData = theSlider.getBoundingClientRect();
         let data = theProject.getBoundingClientRect()
-        let projectLimet = (sliderData.width / 2)
+        let projectLimit = (sliderData.width / 2)
         let projectCo = ((data.x) - (sliderData.x)) + (data.width / 2)
-        let closer = (Math.abs(Math.abs(projectLimet - projectCo) - projectLimet) / projectLimet) + 0.2;
+        let closer = (Math.abs(Math.abs(projectLimit - projectCo) - projectLimit) / projectLimit) + 0.2;
         closer = closer > 1.2 ? 0.2 : closer
 
         theProject.setAttribute("style", `scale:${closer} ; opacity: ${closer};`)
@@ -274,10 +298,48 @@ function crownAction(theSlider, theProjects) {
         if (sliderData.width / 2 < (data.x - sliderData.x) + data.width && sliderData.width / 2 > (data.x - sliderData.x)) {
             theProject.classList.add("active")
             num = (theProject.offsetLeft - theSlider.offsetLeft) - ((theSlider.offsetWidth / 2) - (theProject.offsetWidth / 2))
+            changeProject(theProject)
 
         } else {
             theProject.classList.remove("active")
         }
+    }
+    function changeProject(theProject) {
+        let name = myWork.querySelector(".my-work-name").textContent;
+
+        let myActiveWork = {
+            image: theProject.querySelector(".model").getAttribute("src"),
+            name: theProject.querySelector(".name").textContent,
+            disc: theProject.querySelector(".description").textContent
+        };
+        if (myActiveWork.name != name) {
+            myWork.querySelector(".my-work-model").setAttribute("src", myActiveWork.image)
+            myWork.querySelector(".my-work-name").textContent = myActiveWork.name;
+            let readMore = `<a class="read-more">...readmore</a>`
+            let slicedWork = myActiveWork.disc.slice(0, 200) + (myActiveWork.disc.length > 200 ? readMore : "")
+            myWork.querySelector(".my-work-description").innerHTML = slicedWork
+            document.querySelector(".read-more")?.addEventListener("click", () => {
+                myWork.querySelector(".my-work-description").innerHTML = myActiveWork.disc
+            })
+        }
+
+        if (document.getElementById("portfolio").getBoundingClientRect().y < 300) {
+            let theSection = document.getElementById("fixed-slider")
+            let sectionYOffset = theSection.getBoundingClientRect().y;
+            let windowYOffset = window.pageYOffset;
+
+            let sectionLocation = sectionYOffset + windowYOffset - screen.height + theSection.getBoundingClientRect().height;
+            let browserZoomLevel = Math.round(window.devicePixelRatio * 100) >= 100
+                && Math.round(window.devicePixelRatio * 100) < 150
+                ? (screen.height * (0.1 + (1 - (100 / Math.round(window.devicePixelRatio * 100)))))
+                : 0
+            window.scrollTo(({
+                top: sectionLocation + browserZoomLevel + 80,
+                behavior: 'auto',
+
+            }))
+        }
+
     }
     function scrollHorizontalTo(theSlider, theNum) {
         theSlider.scrollTo(({
@@ -314,12 +376,63 @@ function crownAction(theSlider, theProjects) {
             }
         });
     }
-
+    loopScroll(theSlider, 3)
+    crownMove()
     touchDefine(theSlider)
 
     scrollHorizontalTo(theSlider, num)
+
+
 }
 
 
 crownAction(slider, projects)
 
+
+
+//for social media 
+
+// window.addEventListener("touchstart" , (e) => {
+//     console.log( e ,e.changedTouches[0].clientX , e.changedTouches[0].clientY  );
+// })
+
+window.addEventListener("touchstart", touchStart, false)
+window.addEventListener("touchend", touchEnd, false)
+
+
+var xStart, yStart
+
+function touchStart(e) {
+    xStart = e.changedTouches[0].clientX
+    yStart = e.changedTouches[0].clientY
+
+
+
+}
+let swipeBack;
+
+function touchEnd(e) {
+    var xEnd = e.changedTouches[0].clientX, yEnd = e.changedTouches[0].clientY // store the pageX and pageY in variables for readability
+    let height = document.body.scrollHeight - document.body.offsetHeight;
+    let wy = height - window.pageYOffset;
+    if (Math.abs(yStart - yEnd) < 100) // if there was not a lot of vertical movement
+    {
+        if (xStart - xEnd > 50) // at least 50 pixels horizontal swipe (to the right)
+        {
+            if (xStart >= (screen.width * 0.5) && yStart >= (screen.height * 0.3) && wy > 30) {
+                window.clearTimeout(swipeBack);
+                swipeLeftToRight()
+            }
+            // swipe recognized
+        }
+
+    }
+}
+function swipeLeftToRight() {
+
+    document.getElementById("social-box").setAttribute("style", 'right: 20px;')
+    swipeBack = setTimeout(function () {
+        document.getElementById("social-box").setAttribute("style", '')
+    }, 10000)
+
+}
