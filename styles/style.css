@@ -456,7 +456,16 @@ nav ul a {
     width: calc(80% + 40px);
     max-width: 840px;
 }
-
+#about li[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #272640;
+    padding: 6px 8px;
+    border-radius: 15px;
+    width: max-content;
+}
 .skills-list {
     height: 250px;
     display: flex;
