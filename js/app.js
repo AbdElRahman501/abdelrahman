@@ -436,3 +436,11 @@ function swipeLeftToRight() {
     }, 10000)
 
 }
+function submitHandler() {
+  const btn =   document.getElementById("send-btn")
+  const icon =   document.getElementById("send-icon")
+
+  icon.classList.add("shake")
+  btn.textContent = "Sending"
+
+}

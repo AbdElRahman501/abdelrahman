@@ -543,7 +543,7 @@
             </div>
         </div>
         <div class="center-box">
-            <form action="https://formsubmit.co/abdelrahman.6182@gmail.com" method="POST">
+            <form action="https://formsubmit.co/abdelrahman.6182@gmail.com" onsubmit="submitHandler()" method="POST">
                 <input type="hidden" name="_subject" value="New Email !">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_next" value="https://abd-elrahman.tech/#contact">
@@ -551,26 +551,26 @@
                     <div class="grid-item">
                         <div class="input">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter you name">
+                            <input type="text" id="name" name="name" placeholder="Enter you name" required>
                         </div>
 
                     </div>
                     <div class="grid-item">
                         <div class="input">
                             <label for="Email">E-mail</label>
-                            <input type="email" id="email" name="email" placeholder="Enter you email address">
+                            <input type="email" id="email" name="email" placeholder="Enter you email address" required>
                         </div>
                     </div>
                 </div>
                 <div class="grid-container">
                     <div class="input">
                         <label for="message">your-message</label>
-                        <textarea name="message" id="message" cols="30" rows="10"
+                        <textarea name="message" id="message" cols="30" rows="10" required
                             placeholder="Hi can you help me makin ....."></textarea>
                     </div>
                 </div>
                 <div class="center-box">
-                    <button type="submit">Send <svg width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <button type="submit" ><span id="send-btn" >Send</span><svg id="send-icon" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <path
                                 d="M23.71 1.29C23.575 1.15567 23.4045 1.06267 23.2185 1.02193C23.0325 0.981183 22.8388 0.994392 22.66 1.06L0.660001 9.06C0.470269 9.13197 0.306921 9.25995 0.191652 9.42695C0.0763829 9.59396 0.0146484 9.79208 0.0146484 9.995C0.0146484 10.1979 0.0763829 10.396 0.191652 10.563C0.306921 10.73 0.470269 10.858 0.660001 10.93L10.26 14.77L14.1 24.37C14.1721 24.5514 14.2958 24.7077 14.4557 24.8197C14.6157 24.9316 14.8049 24.9943 15 25C15.2021 24.9959 15.3982 24.9306 15.5624 24.8127C15.7266 24.6949 15.8513 24.5301 15.92 24.34L23.92 2.34C23.9881 2.16308 24.0046 1.97043 23.9674 1.78452C23.9302 1.59862 23.8409 1.42711 23.71 1.29V1.29ZM15 21.2L12.21 14.2L17 9.41L15.59 8L10.76 12.83L3.8 10L21.33 3.67L15 21.2Z"
                                 fill="black" />
