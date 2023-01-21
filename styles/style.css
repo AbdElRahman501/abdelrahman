@@ -105,7 +105,9 @@ a.none {
     font-family: system-ui;
     width: 75%;
 }
-
+button{
+    cursor: pointer;
+}
 .primary-btn {
     display: flex;
     justify-content: center;
@@ -118,7 +120,6 @@ a.none {
     font-size: 16px;
     font-weight: 700;
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    cursor: pointer;
 }
 
 .primary-btn:hover {
