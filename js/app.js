@@ -14,15 +14,12 @@ for (let i = 0; i < 8; i++) {
 }
 let arrayTop = [];
 let arrayRight = [];
-const time = 15000
+const time = 10000
 
 function moveShapes() {
-    arrayTop = []
-    arrayRight = []
-    for (let i = 1; i <= 85; i++) {
-        arrayTop.push(i);
-        arrayRight.push(i);
-    }
+    arrayTop = Array.from({length: 85}, (v, i) => i + 1);
+    arrayRight = [].concat(arrayTop)
+    
     for (let i = 0; i < shapes.length; i++) {
         const shape = shapes[i];
         let randomTop = getRandomNum(arrayTop, "top");
@@ -34,13 +31,7 @@ function moveShapes() {
         let svg = shape.firstElementChild
         svg.setAttribute('style', `width: ${randomWidth}px; filter: blur(${blur}px) `)
     }
-    function getRandomNum(array, type) {
-        let num = Math.floor(Math.random() * array.length);
-        let roll = array.splice(num - 1, 10);
-        let yourNumber = roll.length % 2 === 0 ? roll[roll.length / 2] : roll[(roll.length - 1) / 2];
-        // console.log(yourNumber, roll, array, type, roll.length % 2 === 0 ? roll.length / 2 : (roll.length - 1) / 2)
-        return yourNumber;
-    }
+    
     setTimeout(shake, time - 2000)
 }
 function shake() {
@@ -51,19 +42,27 @@ function shake() {
         }, 2000)
     }
 }
-
-moveShapes()
-setInterval(moveShapes, time)
-
-
-
-
+function getRandomNum(array, type) {
+    let num = Math.floor(Math.random() * array.length);
+    let roll = array.splice(num - 1, 10);
+    let yourNumber = roll.length % 2 === 0 ? roll[roll.length / 2] : roll[(roll.length - 1) / 2];
+    // console.log(yourNumber, roll, array, type, roll.length % 2 === 0 ? roll.length / 2 : (roll.length - 1) / 2)
+    return yourNumber;
+}
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
+moveShapes()
+setTimeout(moveShapes, 1000)
+setInterval(moveShapes, time)
+
+
+
+
+
 
 //////////// for scroll 
 
@@ -306,7 +305,12 @@ function crownAction(theSlider, theProjects) {
     }
     function changeProject(theProject) {
         let name = myWork.querySelector(".my-work-name").textContent;
-
+        let slice = 200
+        if (window.outerWidth < 800) {
+            slice = 50
+        }else{
+            slice = 200
+        }
         let myActiveWork = {
             image: theProject.querySelector(".model").getAttribute("src"),
             name: theProject.querySelector(".name").textContent,
@@ -315,8 +319,8 @@ function crownAction(theSlider, theProjects) {
         if (myActiveWork.name != name) {
             myWork.querySelector(".my-work-model").setAttribute("src", myActiveWork.image)
             myWork.querySelector(".my-work-name").textContent = myActiveWork.name;
-            let readMore = `<a class="read-more">...readmore</a>`
-            let slicedWork = myActiveWork.disc.slice(0, 200) + (myActiveWork.disc.length > 200 ? readMore : "")
+            let readMore = `<a class="read-more">...read more</a>`
+            let slicedWork = myActiveWork.disc.slice(0, slice) + (myActiveWork.disc.length > slice ? readMore : "")
             myWork.querySelector(".my-work-description").innerHTML = slicedWork
             document.querySelector(".read-more")?.addEventListener("click", () => {
                 myWork.querySelector(".my-work-description").innerHTML = myActiveWork.disc
@@ -334,7 +338,7 @@ function crownAction(theSlider, theProjects) {
                 ? (screen.height * (0.1 + (1 - (100 / Math.round(window.devicePixelRatio * 100)))))
                 : 0
             window.scrollTo(({
-                top: sectionLocation + browserZoomLevel + 80,
+                top: sectionLocation + browserZoomLevel + 120,
                 behavior: 'auto',
 
             }))
