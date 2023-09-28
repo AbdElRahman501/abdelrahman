@@ -66,7 +66,6 @@ setInterval(moveShapes, time)
 
 //////////// for scroll 
 
-const navList = document.querySelector('#navbar__list');
 
 // all sections 
 const sections = document.getElementsByTagName("section")
@@ -127,13 +126,13 @@ function leaveHomeSection(id) {
 function editSocialBox() {
     let body = document.body
     let height = body.scrollHeight - body.offsetHeight;
-    let wy = height - window.pageYOffset;
+    let wy = height - window.scrollY;
     let homeSec = document.getElementById("home").getBoundingClientRect().height;
     if (wy <= 30) {
         document.getElementById("social-box").firstElementChild.setAttribute("style", `display: flex;justify-content: center;width: 100%;`)
         document.getElementById("social-box").setAttribute("style", `bottom: 0;left: 0; width: 100%;`)
 
-    } else if (window.pageYOffset >= homeSec) {
+    } else if (window.scrollY >= homeSec) {
         document.getElementById("social-box").setAttribute("style", ``)
         document.getElementById("social-box").firstElementChild.setAttribute("style", ``)
     }
@@ -145,21 +144,17 @@ function delay(URL) {
 
 let navLinks = document.getElementsByClassName("nav-link")
 
-// make function that scroll to the section with id
 function scrollToSection(theSection, sub) {
-    // get the Y Offset of that section
     let sectionYOffset = theSection.getBoundingClientRect().y;
-    // sum of the section Y offset to window Y Offset will get back the position of the section
-    let windowYOffset = window.pageYOffset;
-    // add 50 px to make it a little more under the nav bar 
-    let sectionLocation = sub ? sectionYOffset + windowYOffset + sub : sectionYOffset + windowYOffset - 100
-    //let's scroll to the section Location smooth with scrollTo();
-    window.scrollTo(({
-        top: sectionLocation,
-        behavior: 'smooth',
+    let windowYOffset = window.scrollY;
+    let sectionLocation = sub ? sectionYOffset + windowYOffset + sub : sectionYOffset + windowYOffset - 100;
 
-    }))
+    window.scrollTo({
+        top: sectionLocation,
+        behavior: 'smooth'
+    });
 }
+
 for (let navLink of navLinks) {
     navLink.addEventListener("click", function (event) {
         event.preventDefault()
@@ -330,7 +325,7 @@ function crownAction(theSlider, theProjects) {
         if (document.getElementById("portfolio").getBoundingClientRect().y < 300) {
             let theSection = document.getElementById("fixed-slider")
             let sectionYOffset = theSection.getBoundingClientRect().y;
-            let windowYOffset = window.pageYOffset;
+            let windowYOffset = window.scrollY;
 
             let sectionLocation = sectionYOffset + windowYOffset - screen.height + theSection.getBoundingClientRect().height;
             let browserZoomLevel = Math.round(window.devicePixelRatio * 100) >= 100
@@ -394,11 +389,11 @@ crownAction(slider, projects)
 
 
 
-//for social media 
+// for social media 
 
-// window.addEventListener("touchstart" , (e) => {
-//     console.log( e ,e.changedTouches[0].clientX , e.changedTouches[0].clientY  );
-// })
+window.addEventListener("touchstart" , (e) => {
+    console.log( e ,e.changedTouches[0].clientX , e.changedTouches[0].clientY  );
+})
 
 window.addEventListener("touchstart", touchStart, false)
 window.addEventListener("touchend", touchEnd, false)
@@ -410,15 +405,13 @@ function touchStart(e) {
     xStart = e.changedTouches[0].clientX
     yStart = e.changedTouches[0].clientY
 
-
-
 }
 let swipeBack;
 
 function touchEnd(e) {
     var xEnd = e.changedTouches[0].clientX, yEnd = e.changedTouches[0].clientY // store the pageX and pageY in variables for readability
     let height = document.body.scrollHeight - document.body.offsetHeight;
-    let wy = height - window.pageYOffset;
+    let wy = height - window.scrollY;
     if (Math.abs(yStart - yEnd) < 100) // if there was not a lot of vertical movement
     {
         if (xStart - xEnd > 50) // at least 50 pixels horizontal swipe (to the right)
