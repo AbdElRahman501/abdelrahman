@@ -341,13 +341,16 @@ function crownAction(theSlider, theProjects) {
     let myActiveWork = {
       image: theProject.querySelector(".model").getAttribute("src"),
       name: theProject.querySelector(".name").textContent,
+      link: theProject.querySelector(".link")?.textContent || "",
       disc: theProject.querySelector(".description").textContent,
     };
     if (myActiveWork.name != name) {
       myWork
         .querySelector(".my-work-model")
         .setAttribute("src", myActiveWork.image);
-      myWork.querySelector(".my-work-name").textContent = myActiveWork.name;
+      myWork.querySelector(".my-work-name").innerHTML = myActiveWork.link
+        ? `<a href="${myActiveWork.link}" class="hover:underline font-bold text-2xl" >${myActiveWork.name}</a>`
+        : `<span class="font-bold text-2xl">${myActiveWork.name}</span>`;
       let readMore = `<a class="read-more">...read more</a>`;
       let slicedWork =
         myActiveWork.disc.slice(0, slice) +
